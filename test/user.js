@@ -1,5 +1,15 @@
 var should = require('should');
-describe('my test series', {
-  it('should do smth', function(done){...})
-  it('should do smth else', function(done){...})
-})
+var assert = require('assert');
+
+var user = require('../lib/user');
+
+describe('User', function() {
+  describe('#get()', function() {
+    it('should execute the callback', function() {
+       var tmp = user.get("wilson", function(user){
+          return user;
+        });
+      assert.equal("wilson", tmp);
+    });
+  });
+});
