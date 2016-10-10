@@ -10,5 +10,13 @@ describe('User', () ->
     )
     return
   )
+  describe('#save()', ()->
+    it('should execute the callback', () ->
+      tmp = user.save("jack", (user)->user)
+      should.equal("jack", tmp)
+      return
+    )
+    return
+  )
   return
 )

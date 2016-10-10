@@ -16,6 +16,15 @@
         should.equal("jack", tmp);
       });
     });
+    describe('#save()', function() {
+      it('should execute the callback', function() {
+        var tmp;
+        tmp = user.save("jack", function(user) {
+          return user;
+        });
+        should.equal("jack", tmp);
+      });
+    });
   });
 
 }).call(this);
