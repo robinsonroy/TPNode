@@ -1,0 +1,9 @@
+{
+  "name": "TP-app",
+  "description": "Simple dashboard app",
+  "version": "0.1.0",
+  "dependencies": {
+    "mocha": "^3.1.1",
+    "should": "^11.1.0"
+  }
+}
