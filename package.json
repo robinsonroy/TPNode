@@ -3,11 +3,20 @@
   "description": "Simple dashboard app",
   "version": "0.1.0",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "coffee-script": "^1.11.1",
+    "express": "^4.14.0",
+    "jstransformer-coffee-script": "^1.1.0",
+    "level": "^1.5.0",
+    "level-session-store": "^2.0.1",
+    "level-ws": "0.0.1",
     "mocha": "^3.1.1",
+    "morgan": "^1.7.0",
+    "nodemon": "^1.11.0",
+    "pug": "^2.0.0-beta6",
     "should": "^11.1.0"
   },
   "scripts": {
-  "test": "bin/test"
+    "test": "bin/test"
   }
 }
