@@ -1,6 +1,5 @@
 ## Start leveldb-cli :
-- cd go
-- bin/leveldb-cli
+- go/bin/leveldb-cli
 
 ___
 ## Open database :

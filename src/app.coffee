@@ -49,14 +49,24 @@ app.put '/signup', (req, res)->
     res.status(200).send()
 
 app.get '/users', (req, res)->
-  user.get (err)->
+  user.get (err, data) ->
     throw err if err
     res.render 'user-layout'
 
-app.get '/user:username', (req, res)->
-  user.get username, (err)->
-    throw err if err
-    res.status(200).send()
+app.get '/user/:username', (req, res)->
+  user.get req.params.username, (err, value)->
+    if err
+      res.render 'error',
+        error: err
+      res.status(err).send()
+    else
+      res.render 'user-layout',
+        username: req.params.username
+        name: value.name
+        password: value.password
+        email: value.email
+      res.status(200).send()
+
 
 app.listen app.get('port'), ->
   console.log "listen on port #{app.get 'port'}"

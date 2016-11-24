@@ -11,18 +11,17 @@ module.exports =
       ).on 'end', ->
         console.log 'Stream ended'
 
-  post: (user, callback) ->
-    metrics = []
-    consol.log id
-    rs = db.createdReadStream()
-      start: "user:#{username}"
-      stop: "user:#{id}"
-    .on 'data', (data) ->
-      [_, _username] = data.key.split ':'
-      []
-    rs.on 'error', callback
-    rs.on 'close', ->
-      callback null, user
+  get: (username, callback) ->
+    db.get username, (err, value) ->
+      if err then callback err
+      else
+        [_password, _name, _email] = value.split(':')
+        value = {
+            "password": _password,
+            "name" : _name,
+            "email" : _email
+          }
+        callback err, value
 
   save: (username, password, name, email, callback) ->
     db.put "#{username}", "#{name}:#{password}:#{email}", (err) -> 
