@@ -1,27 +1,50 @@
 # http = require('http')
-# user = require('./user')
-#
-# http.createServer((req, res) ->
-#   user.get 'Robinson', (id) ->
-#     res.writeHead 200, {'Content-Type': 'text/plain'}
-#     res.end 'Hello ' + id
-#     return
-#   return
-# ).listen 8080
 
 express = require 'express'
+session = require 'express-session'
+levelStore = require('level-session-store')(session);
 metrics = require './metrics'
 user = require './user'
-morgan  = require('morgan')
+morgan  = require 'morgan'
 bodyparser = require 'body-parser'
+stylus = require 'stylus'
+nib = require 'nib'
 
 
 app = express()
 app.use morgan 'dev'
 
+app.use stylus.middleware
+   src: __dirname + '/../stylesheets'
+   dest: __dirname + '/../public/css'
+   compile: (str, path) ->
+     stylus(str)
+       .set('filename', path)
+       .set('compress', true)
+       .use(nib())
+       .import('nib')
+
 app.use bodyparser.json()
+app.use bodyparser.urlencoded(
+  extended: true
+)
 
 app.set 'port', 1337
+
+app.use session(
+  secret: 'metricsApp'
+  store: new levelStore './db/session'
+  resave: true
+  saveUninitialized: true
+  cookie: { secure: true }
+)
+
+
+authCheck = (req, res, next) ->
+  if req.session.loggedIn == true
+    next()
+  else
+    res.redirect '/signin'
 
 app.set('view engine', 'pug')
 app.set('views', "#{__dirname}/../views")
@@ -29,11 +52,25 @@ app.set('views', "#{__dirname}/../views")
 app.use '/', express.static "#{__dirname}/../public"
 
 app.get '/', (req, res) ->
-  res.send "hello world !"
+  res.redirect '/login'
 
-app.get '/hello/:name', (req, res) ->
-  res.render 'layout',
-    name: req.params.name
+app.get '/login', (req, res) ->
+  console.log "Login Error : " + req.query.error
+  res.render 'login',
+    error: req.query.error ?= ''
+
+app.post '/login', (req, res) ->
+  user.get req.body.username, req.body.password, (err, value)->
+    if err
+      console.log err
+      req.params.error = err
+      res.redirect '/login'+'/?error='+err,
+    else
+      res.render 'user-layout',
+        user: value
+
+app.get '/app', (req, res) ->
+  res.end('Salut tout le monde !');
 
 app.get '/metrics.json', (req, res) ->
   metrics.get (err, data) ->
@@ -52,16 +89,6 @@ app.get '/users', (req, res)->
   user.get (err, data) ->
     throw err if err
     res.render 'user-layout'
-
-app.get '/user/:username', (req, res)->
-  user.get req.params.username, (err, value)->
-    if err
-      res.render 'error',
-        error: err
-    else
-      res.render 'user-layout',
-        username : req.params.username
-        user: value
 
 app.listen app.get('port'), ->
   console.log "listen on port #{app.get 'port'}"

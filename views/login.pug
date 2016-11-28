@@ -1,0 +1,27 @@
+doctype
+html(lang="en")
+  head
+    title Login
+    include head.pug
+
+  style
+    :stylus
+      .highlight
+        margin-top: 50vh
+        transform: translateY(-50%)
+        padding-top: 40px
+        padding-bottom: 40px
+
+  body
+    figure.highlight.col-md-6.col-md-offset-3
+      form(method="post" action="/login")
+        .form-group
+          label Username
+          input(type="email" class="form-control" name="username" placeholder="Username")
+        .form-group
+          label Password
+          input(type="password" class="form-control" name="password" placeholder="Password")
+        .form-group
+          .alert.alert-warning
+            p #{error}
+        button(type="submit" class="btn btn-default") submit

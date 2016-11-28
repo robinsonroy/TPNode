@@ -11,13 +11,15 @@ module.exports =
       ).on 'end', ->
         console.log 'Stream ended'
 
-  get: (username, callback) ->
+  get: (username, password, callback) ->
     db.get username, (err, value) ->
       if err then callback err
       else
         [_password, _name, _email] = value.split(':')
+        if password != _password
+          console.log("Password not correct")
+          return callback "Password not correct"
         callback null,
-          password: _password
           name : _name
           email : _email
           username: username
