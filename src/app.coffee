@@ -61,10 +61,8 @@ app.get '/user/:username', (req, res)->
       res.status(err).send()
     else
       res.render 'user-layout',
-        username: req.params.username
-        name: value.name
-        password: value.password
-        email: value.email
+        username : req.params.username
+        user: value
       res.status(200).send()
 
 
