@@ -16,12 +16,11 @@ module.exports =
       if err then callback err
       else
         [_password, _name, _email] = value.split(':')
-        value = {
-            "password": _password,
-            "name" : _name,
-            "email" : _email
-          }
-        callback err, value
+        callback null,
+          password: _password
+          name : _name
+          email : _email
+          username: username
 
   save: (username, password, name, email, callback) ->
     db.put "#{username}", "#{name}:#{password}:#{email}", (err) -> 

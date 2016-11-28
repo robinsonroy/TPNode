@@ -58,13 +58,10 @@ app.get '/user/:username', (req, res)->
     if err
       res.render 'error',
         error: err
-      res.status(err).send()
     else
       res.render 'user-layout',
         username : req.params.username
         user: value
-      res.status(200).send()
-
 
 app.listen app.get('port'), ->
   console.log "listen on port #{app.get 'port'}"
