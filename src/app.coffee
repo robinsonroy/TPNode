@@ -75,6 +75,21 @@ app.get '/logout', authCheck, (req,res) ->
   delete req.session.user
   res.redirect '/'
 
+app.get '/signup', (req, res)->
+  res.render 'signup',
+    error: req.query.error ?= ''
+
+app.post '/signup', (req, res)->
+  user.save req.body.username, req.body.name, req.body.password, req.body.email, (err) ->
+    if err
+      req.params.err = err
+      res.redirect '/signup'
+    else
+      console.log "Signup secess"
+      req.session.loggedIn = true;
+      req.session.user = req.body.username;
+      res.redirect '/'
+
 app.get '/', authCheck, (req, res) ->
   console.log("access to app")
   res.end('Welcome !');
