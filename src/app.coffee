@@ -36,23 +36,24 @@ app.use session(
   store: new levelStore './db/session'
   resave: true
   saveUninitialized: true
-  cookie: { secure: true }
+  #cookie: { secure: true }
 )
 
 
 authCheck = (req, res, next) ->
+  console.log "Auth Check ..."
+  console.log req.session.user
   if req.session.loggedIn == true
+    console.log("auth check ok")
     next()
   else
-    res.redirect '/signin'
+    console.log("auth check nok")
+    res.redirect '/login'
 
 app.set('view engine', 'pug')
 app.set('views', "#{__dirname}/../views")
 
 app.use '/', express.static "#{__dirname}/../public"
-
-app.get '/', (req, res) ->
-  res.redirect '/login'
 
 app.get '/login', (req, res) ->
   console.log "Login Error : " + req.query.error
@@ -62,15 +63,21 @@ app.get '/login', (req, res) ->
 app.post '/login', (req, res) ->
   user.get req.body.username, req.body.password, (err, value)->
     if err
-      console.log err
       req.params.error = err
       res.redirect '/login'+'/?error='+err,
     else
-      res.render 'user-layout',
-        user: value
+      req.session.loggedIn = true;
+      req.session.user = value.username;
+      res.redirect '/'
 
-app.get '/app', (req, res) ->
-  res.end('Salut tout le monde !');
+app.get '/logout', authCheck, (req,res) ->
+  delete req.session.loggedIn
+  delete req.session.user
+  res.redirect '/'
+
+app.get '/', authCheck, (req, res) ->
+  console.log("access to app")
+  res.end('Welcome !');
 
 app.get '/metrics.json', (req, res) ->
   metrics.get (err, data) ->

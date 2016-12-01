@@ -6,11 +6,12 @@
 
 #TODO :
 
-- [ ] auth
+- [x] Auth conf
+- [ ] Auth
 - [x] Signup
 - [x] get user
 - [x] Signin
-- [ ] delete user
-- [ ] get metrics
-- [ ] put metrics
-- [ ] delete metrics
+- [ ] Delete user
+- [ ] Get metrics
+- [ ] Put metrics
+- [ ] Delete metrics
