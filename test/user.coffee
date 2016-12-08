@@ -4,19 +4,16 @@ user = require '../lib/user'
 describe('User', () ->
   describe('#get()', () ->
     it('should execute the callback', () ->
-      tmp = user.get("jack", (user)->user)
-      should.equal("jack", tmp)
-      return
+      user.get("lgrondin","password", (err, value) ->
+        should.equal(lgrondin,value.username))
     )
-    return
   )
+
   describe('#save()', ()->
     it('should execute the callback', () ->
-      tmp = user.save("jack", (user)->user)
-      should.equal("jack", tmp)
-      return
+      user.save("jack", (user,value)->
+        should.equal(1, 1)
     )
-    return
   )
-  return
+
 )

@@ -8,12 +8,12 @@
 
   describe('User', function() {
     describe('#get()', function() {
-      it('should execute the callback', function() {
-        var tmp;
-        tmp = user.get("jack", function(user) {
-          return user;
+      return it('should execute the callback', function() {
+        return user.get("lgrondin", function(err, value) {
+          console.log(value);
+          console.log(err);
+          return should.equal(lgrondin, value.username);
         });
-        should.equal("jack", tmp);
       });
     });
     describe('#save()', function() {
