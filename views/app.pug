@@ -1,0 +1,29 @@
+doctype html
+html(lang="en")
+  head
+    title Metrics
+    include head.pug
+
+    body
+      form.inline-form(method="post", action="metric")
+        .form-group
+          button#metric-add-form-show.btn.btn-info.btn-block(type="button") Add Metric +
+          button#metric-add-form-hide.btn.btn-info.btn-block(type="button" style="display:none") Add Metric -
+        .form-group#metric-add-form(style="display : none")
+          input#value.form-control(type="text" placeholder="Value")
+          button.btn.btn-default(type="submit") Add metric
+      if metric_error
+        .form-group
+          .alert.alert-warning
+            p #{metric_error}
+
+      script
+        :coffee-script
+          $("#metric-add-form-show").click () ->
+            $("#metric-add-form").show()
+            $("#metric-add-form-show").hide()
+            $("#metric-add-form-hide").show()
+          $("#metric-add-form-hide").click () ->
+            $("#metric-add-form").hide()
+            $("#metric-add-form-show").show()
+            $("#metric-add-form-hide").hide()

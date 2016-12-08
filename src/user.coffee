@@ -1,5 +1,6 @@
 db = require('./db')("user")
 
+
 module.exports =
   get: (callback) ->
     callback null, db.createReadStream().on('data', (data) ->

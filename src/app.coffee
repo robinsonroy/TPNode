@@ -10,7 +10,6 @@ bodyparser = require 'body-parser'
 stylus = require 'stylus'
 nib = require 'nib'
 
-
 app = express()
 app.use morgan 'dev'
 
@@ -39,11 +38,10 @@ app.use session(
   #cookie: { secure: true }
 )
 
-
 authCheck = (req, res, next) ->
   console.log "Auth Check ..."
-  console.log req.session.user
-  if req.session.loggedIn == true
+  console.log req.session.username
+  if req.session.username
     console.log("auth check ok")
     next()
   else
@@ -67,12 +65,12 @@ app.post '/login', (req, res) ->
       res.redirect '/login'+'/?error='+err,
     else
       req.session.loggedIn = true;
-      req.session.user = value.username;
+      req.session.username = value.username;
       res.redirect '/'
 
 app.get '/logout', authCheck, (req,res) ->
   delete req.session.loggedIn
-  delete req.session.user
+  delete req.session.username
   res.redirect '/'
 
 app.get '/signup', (req, res)->
@@ -87,12 +85,13 @@ app.post '/signup', (req, res)->
     else
       console.log "Signup secess"
       req.session.loggedIn = true;
-      req.session.user = req.body.username;
+      req.session.username = req.body.username;
       res.redirect '/'
 
 app.get '/', authCheck, (req, res) ->
   console.log("access to app")
-  res.end('Welcome !');
+  res.render 'app',
+    metric_error: req.query.metric_error ?= ''
 
 app.get '/metrics.json', (req, res) ->
   metrics.get (err, data) ->
@@ -102,15 +101,27 @@ app.get '/metrics.json', (req, res) ->
 app.get '/metrics', (req, res)->
   res.render 'metrics-layout'
 
-app.put '/signup', (req, res)->
-  user.save req.body.username, req.body.name, req.body.password, req.body.email, (err) ->
-    throw err if err
-    res.status(200).send()
+# app.put '/signup', (req, res)->
+#   user.save req.body.username, req.body.name, req.body.password, req.body.email, (err) ->
+#     throw err if err
+#     res.status(200).send()
 
-app.get '/users', (req, res)->
-  user.get (err, data) ->
-    throw err if err
-    res.render 'user-layout'
+app.get '/now', (req, res)->
+  # d = new Date()
+  # n = d.getTime()
+  # res.end(n.toString())
+
+app.post '/metric', authCheck, (req, res)->
+  console.log "ici"
+  metric = timestamp: req.body.timestamp, value: req.body.value, groupe: req.body.group
+  metrics.save req.session.username, metric, (err) ->
+    if err
+      console.log "error"
+      req.params.metric_error = err
+      res.redirect '/'
+    else
+      console.log "ok"
+      res.redirect '/'
 
 app.listen app.get('port'), ->
   console.log "listen on port #{app.get 'port'}"

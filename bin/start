@@ -1,5 +1,5 @@
 #!/bin/bash
 
 #coffee src/app.coffee
-coffee --compile --output lib/ src/
-node lib/app.js
+#coffee --compile --output lib/ src/
+nodemon src/app.coffee
