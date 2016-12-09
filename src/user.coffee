@@ -1,6 +1,5 @@
 db = require('./db')("user")
 
-
 module.exports =
 
   get: (username, password, callback) ->

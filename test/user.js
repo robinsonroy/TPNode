@@ -6,4 +6,27 @@
 
   user = require('../lib/user');
 
+  describe('User', function() {
+    describe('#save()', function() {
+      return it('should add a user to the database', function(done) {
+        return user.save("jack", "password", "JackRichard", "jack@gmail.com", function(err) {
+          console.log(err);
+          should.equal(void 0, err);
+          return done();
+        });
+      });
+    });
+    return describe('#get()', function() {
+      return it('should execute add user', function(done) {
+        return user.get("jack", "password", function(err, value) {
+          console.log(value);
+          should.equal("jack", value.username);
+          should.equal("JackRichard", value.name);
+          should.equal("jack@gmail.com", value.email);
+          return done();
+        });
+      });
+    });
+  });
+
 }).call(this);
