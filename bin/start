@@ -1,5 +1,6 @@
 #!/bin/bash
 
 #coffee src/app.coffee
+coffee --compile --output public/js public/coffee
 coffee --compile --output lib/ src/
 nodemon src/app.coffee

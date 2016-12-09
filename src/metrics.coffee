@@ -4,10 +4,26 @@ shortid = require 'shortid'
 
 module.exports =
   get: (username, callback) ->
-    callback null
+    metrics = []
+    rs = db.createReadStream()
+    rs.on 'data', (data) ->
+      [_username, _group, _id] = data.key.split(':')
+      if(_username == username)
+        [_timestamp, _value] = data.value.split(':')
+        metric =
+          "username" : _username,
+          "group" : _group,
+          "id" : _id,
+          "timestamp" : _timestamp,
+          "value" : _value
+        metrics.push (metric)
+    rs.on 'error', ()->
+      callback error, null
+    rs.on 'close', ()->
+      callback null, metrics
 
-  get: (username, groupe, callback) ->
-    callback null
+  getInGroupe: (username, groupe, callback) ->
+  #   callback null
 
   save: (username, metrics, callback) -> 
     console.log "Save some metrics"

@@ -102,6 +102,12 @@ app.get '/', authCheck, (req, res) ->
 #     throw next err if err
 #     res.status(200).json data
 
+app.get '/metrics.json', authCheck, (req, res)->
+  metrics.get req.session.username, (err, data)->
+    throw next err if err
+    res.status(200).json data
+
+
 app.post '/metrics.json', authCheck, (req, res)->
   metricsJson = req.body
   metrics.save req.session.username, metricsJson, (err) ->
