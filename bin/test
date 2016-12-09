@@ -1,4 +1,5 @@
 #!/bin/bash
 
+coffee --compile --output lib/ src/
 coffee --compile --output test/ test/
 ./node_modules/.bin/mocha test/user.js
