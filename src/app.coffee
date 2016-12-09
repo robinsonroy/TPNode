@@ -39,13 +39,12 @@ app.use session(
 )
 
 authCheck = (req, res, next) ->
-  console.log "Auth Check ..."
-  console.log req.session.username
+  console.log "Auth Check for " + req.session.username
   if req.session.username
-    console.log("auth check ok")
+    console.log("Auth check ok")
     next()
   else
-    console.log("auth check nok")
+    console.log("Auth check nok")
     res.redirect '/login'
 
 app.set('view engine', 'pug')
@@ -69,6 +68,7 @@ app.post '/login', (req, res) ->
       res.redirect '/'
 
 app.get '/logout', authCheck, (req,res) ->
+  console.log "Logout of " + req.session.username
   delete req.session.loggedIn
   delete req.session.username
   res.redirect '/'
@@ -89,38 +89,27 @@ app.post '/signup', (req, res)->
       res.redirect '/'
 
 app.get '/', authCheck, (req, res) ->
-  console.log("access to app")
   res.render 'app',
     metric_error: req.query.metric_error ?= ''
 
-app.get '/metrics.json', (req, res) ->
-  metrics.get (err, data) ->
-    throw next err if err
-    res.status(200).json data
+# app.get '/metrics.json', authCheck, (req, res) ->
+#   metrics.get (req.session.username, groupe, err, data) ->
+#     throw next err if err
+#     res.status(200).json data
+#
+# app.get '/:groupe/metrics.json', authCheck, (req, res) ->
+#   metrics.get (req.session, groupe, err, data) ->
+#     throw next err if err
+#     res.status(200).json data
 
-app.get '/metrics', (req, res)->
-  res.render 'metrics-layout'
-
-# app.put '/signup', (req, res)->
-#   user.save req.body.username, req.body.name, req.body.password, req.body.email, (err) ->
-#     throw err if err
-#     res.status(200).send()
-
-app.get '/now', (req, res)->
-  # d = new Date()
-  # n = d.getTime()
-  # res.end(n.toString())
-
-app.post '/metric', authCheck, (req, res)->
-  console.log "ici"
-  metric = timestamp: req.body.timestamp, value: req.body.value, groupe: req.body.group
-  metrics.save req.session.username, metric, (err) ->
+app.post '/metrics.json', authCheck, (req, res)->
+  metricsJson = req.body
+  metrics.save req.session.username, metricsJson, (err) ->
     if err
-      console.log "error"
+      console.log "error" + err
       req.params.metric_error = err
       res.redirect '/'
     else
-      console.log "ok"
       res.redirect '/'
 
 app.listen app.get('port'), ->

@@ -7,11 +7,27 @@
 #TODO :
 
 - [x] Auth conf
-- [ ] Auth
+- [x] Auth
 - [x] Signup
 - [x] get user
 - [x] Signin
-- [ ] Delete user
-- [ ] Get metrics
-- [ ] Put metrics
-- [ ] Delete metrics
+- [ ] CRUD user
+  - [x] Create
+  - [x] Get
+  - [ ] Update
+  - [ ] Delete
+- [ ] CRUD metrics
+  - [x] Create
+  - [ ] Get
+  - [x] Update
+  - [ ] Delete
+- [ ] CRUD metrics test
+  - [ ] Create
+  - [ ] Get
+  - [ ] Update
+  - [ ] Delete
+- [ ] CRUD user test
+  - [ ] Create
+  - [ ] Get
+  - [ ] Update
+  - [ ] Delete
