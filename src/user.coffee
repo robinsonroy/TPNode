@@ -1,6 +1,5 @@
 db = require('./db')("user")
 
-
 module.exports =
   get: (callback) ->
     callback null, db.createReadStream().on('data', (data) ->
@@ -26,7 +25,7 @@ module.exports =
           username: username
 
   save: (username, password, name, email, callback) ->
-    db.put "#{username}", "#{name}:#{password}:#{email}", (err) -> 
+    db.put "#{username}", "#{password}:#{name}:#{email}", (err) -> 
       if err then callback err
       else
         console.log 'user ' + username + ' add'

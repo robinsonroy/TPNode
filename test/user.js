@@ -7,22 +7,24 @@
   user = require('../lib/user');
 
   describe('User', function() {
-    describe('#get()', function() {
-      return it('should execute the callback', function() {
-        return user.get("lgrondin", function(err, value) {
-          console.log(value);
+    describe('#save()', function() {
+      return it('should add a user to the database', function(done) {
+        return user.save("jack", "password", "JackRichard", "jack@gmail.com", function(err) {
           console.log(err);
-          return should.equal(lgrondin, value.username);
+          should.equal(void 0, err);
+          return done();
         });
       });
     });
-    describe('#save()', function() {
-      it('should execute the callback', function() {
-        var tmp;
-        tmp = user.save("jack", function(user) {
-          return user;
+    return describe('#get()', function() {
+      return it('should execute add user', function(done) {
+        return user.get("jack", "password", function(err, value) {
+          console.log(value);
+          should.equal("jack", value.username);
+          should.equal("JackRichard", value.name);
+          should.equal("jack@gmail.com", value.email);
+          return done();
         });
-        should.equal("jack", tmp);
       });
     });
   });

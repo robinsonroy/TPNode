@@ -2,18 +2,26 @@ should = require 'should'
 user = require '../lib/user'
 
 describe('User', () ->
-  describe('#get()', () ->
-    it('should execute the callback', () ->
-      user.get("lgrondin","password", (err, value) ->
-        should.equal(lgrondin,value.username))
-    )
-  )
 
   describe('#save()', ()->
-    it('should execute the callback', () ->
-      user.save("jack", (user,value)->
-        should.equal(1, 1)
+    it('should add a user to the database', (done) ->
+      user.save("jack", "password", "JackRichard", "jack@gmail.com", (err)->
+        console.log err
+        should.equal(undefined, err)
+        done()
+        )
     )
   )
 
+  describe('#get()', () ->
+    it('should execute add user', (done) ->
+        user.get("jack", "password", (err,value)->
+          console.log value
+          should.equal("jack",value.username)
+          should.equal("JackRichard",value.name)
+          should.equal("jack@gmail.com",value.email)
+          done()
+        )
+      )
+    )
 )
