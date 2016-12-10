@@ -48,7 +48,7 @@ jspm_packages
 *.tgz
 
 # Database
-db
+#db
 
 # JS file transpil by coffee
 lib

@@ -13,64 +13,79 @@ user.save "debug", "pwd", "debugMan", "debug@gmail.com", (err)->
   throw err if err
 
 metricsRobinson = [
+  'id' : 'HJxAXKFXx'
   'group': 'Temperature'
   'timestamp': '2013-04-14 14:30 UTC'
   'value': 10
 ,
+  'id' : 'Byx7iEKFXe'
   'group': 'Temperature'
   'timestamp': '2013-04-16 14:30 UTC'
   'value': 12
 ,
+  'id' : 'ByZmsNFYQg'
   'group': 'Temperature'
   'timestamp': '2013-04-18 14:30 UTC'
   'value': 9
 ,
+  'id' : 'HyzQoNKYmg'
   'group': 'Temperature'
   'timestamp': '2013-04-20 14:30 UTC'
   'value': 14
 ,
+  'id' : 'Byx7iEKFXe'
   'group': 'Polution'
   'timestamp': '2013-04-14 14:30 UTC'
   'value': 150
 ,
+  'id' : 'H1N7jEYYXl'
   'group': 'Polution'
   'timestamp': '2013-04-16 14:30 UTC'
   'value': 170
 ,
+  'id' : 'ByHQoVKKme'
   'group': 'Polution'
   'timestamp': '2013-04-18 14:30 UTC'
   'value': 185
 ,
+  'id' : 'H1aeRQttQe'
   'group': 'Polution'
   'timestamp': '2013-04-20 14:30 UTC'
-  'value': 150
+  'value': 145
 ]
 
 metricsDebug = [
+  'id': 'HJPmsEFFXx'
   'group': 'BankAccountBalance'
   'timestamp': '2013-12-01 14:30 UTC'
   'value': 1000
 ,
+  'id' : 'HJPmsEFFXx'
   'group': 'BankAccountBalance'
   'timestamp': '2013-12-05 14:30 UTC'
   'value': 700
 ,
+  'id' : 'HJhlR7KtXl'
   'group': 'BankAccountBalance'
   'timestamp': '2013-12-10 14:30 UTC'
   'value': 600
 ,
+  'id' : 'HJilCXYKQx'
   'group': 'BankAccountBalance'
   'timestamp': '2013-12-15 14:30 UTC'
   'value': 460
 ,
+  'id' : 'Hk5XsEKF7g'
   'group': 'BankAccountBalance'
   'timestamp': '2013-12-20 14:30 UTC'
   'value': -30
 ,
+  'id' : 'Byx7iEKFXe'
   'group': 'BankAccountBalance'
   'timestamp': '2013-12-25 14:30 UTC'
   'value': -240
 ,
+  'id' : 'S1_xAmtY7e'
   'group': 'BankAccountBalance'
   'timestamp': '2013-12-30 14:30 UTC'
   'value': -125
