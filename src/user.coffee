@@ -8,7 +8,6 @@ module.exports =
       else
         [_password, _name, _email] = value.split(':')
         if password != _password
-          console.log("Password not correct")
           return callback "Password not correct"
         callback null,
           name : _name
@@ -24,3 +23,8 @@ module.exports =
 
   remove: (username, callback)->
     callback(username)
+
+  delete: (username, callback)->
+    console.log username + " has deleting is account"
+    db.del username, (err)->
+      callback err

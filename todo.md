@@ -18,7 +18,8 @@
   - [ ] Delete
 - [ ] CRUD metrics
   - [x] Create
-  - [ ] Get
+  - [x] Get
+  - [x] get from group
   - [x] Update
   - [ ] Delete
 - [ ] CRUD metrics test

@@ -78,7 +78,7 @@ app.get '/signup', (req, res)->
     error: req.query.error ?= ''
 
 app.post '/signup', (req, res)->
-  user.save req.body.username, req.body.name, req.body.password, req.body.email, (err) ->
+  user.save req.body.username, req.body.password, req.body.name, req.body.email, (err) ->
     if err
       req.params.err = err
       res.redirect '/signup'
@@ -88,25 +88,25 @@ app.post '/signup', (req, res)->
       req.session.username = req.body.username;
       res.redirect '/'
 
+app.post '/user/delete', authCheck, (req, res)->
+  metrics.deleteFromUser req.session.username, (err)->
+    throw err if err
+    next()
+  user.delete req.session.username, (err) ->
+    throw err if err
+    res.redirect '/logout'
+
 app.get '/', authCheck, (req, res) ->
   res.render 'app',
     metric_error: req.query.metric_error ?= ''
 
-# app.get '/metrics.json', authCheck, (req, res) ->
-#   metrics.get (req.session.username, groupe, err, data) ->
-#     throw next err if err
-#     res.status(200).json data
-#
-# app.get '/:groupe/metrics.json', authCheck, (req, res) ->
-#   metrics.get (req.session, groupe, err, data) ->
-#     throw next err if err
-#     res.status(200).json data
-
+## send all the user's metrics
+## If group is pass in query it send back all the user's metrics for one group
 app.get '/metrics.json', authCheck, (req, res)->
   metrics.get req.session.username, (err, data)->
     throw next err if err
     res.status(200).json data
-
+  , req.query.group
 
 app.post '/metrics.json', authCheck, (req, res)->
   metricsJson = req.body
@@ -117,6 +117,12 @@ app.post '/metrics.json', authCheck, (req, res)->
       res.redirect '/'
     else
       res.redirect '/'
+
+app.post '/metric/delete/:group/:id', authCheck, (req, res) ->
+  key = req.session.username + ':' + req.params.group + ':' + req.params.id
+  metrics.delete key , (err) ->
+    throw err if err
+    res.redirect '/'
 
 app.listen app.get('port'), ->
   console.log "listen on port #{app.get 'port'}"

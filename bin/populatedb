@@ -1,3 +1,83 @@
 #!/usr/bin/env coffee
 
-db = require "#{__dirname}"/../src/db.coffee
+user = require "#{__dirname}/../src/user"
+metrics = require "#{__dirname}/../src/metrics"
+
+user.save "robinsonroy", "Robinson", "qwerty", "rroy@gmail.com", (err) ->
+  throw err if err
+
+user.save "lgrondin", "password", "Lionel", "lgrondin@gmail.com", (err)->
+  throw err if err
+
+user.save "debug", "pwd", "debugMan", "debug@gmail.com", (err)->
+  throw err if err
+#
+# metricsRobinson = [
+#   'group': 'Temperature'
+#   'timestamp': '2013-04-14 14:30 UTC'
+#   'value': 10
+# ,
+#   'group': 'Temperature'
+#   'timestamp': '2013-04-16 14:30 UTC'
+#   'value': 12
+# ,
+#   'group': 'Temperature'
+#   'timestamp': '2013-04-18 14:30 UTC'
+#   'value': 9
+# ,
+#   'group': 'Temperature'
+#   'timestamp': '2013-04-20 14:30 UTC'
+#   'value': 14
+# ,
+#   'group': 'Polution'
+#   'timestamp': '2013-04-14 14:30 UTC'
+#   'value': 150
+# ,
+#   'group': 'Polution'
+#   'timestamp': '2013-04-16 14:30 UTC'
+#   'value': 170
+# ,
+#   'group': 'Polution'
+#   'timestamp': '2013-04-18 14:30 UTC'
+#   'value': 185
+# ,
+#   'group': 'Polution'
+#   'timestamp': '2013-04-20 14:30 UTC'
+#   'value': 150
+# ]
+#
+# metricsDebug = [
+#   'group': 'BankAccountBalance'
+#   'timestamp': '2013-12-01 14:30 UTC'
+#   'value': 1000
+# ,
+#   'group': 'BankAccountBalance'
+#   'timestamp': '2013-12-05 14:30 UTC'
+#   'value': 700
+# ,
+#   'group': 'BankAccountBalance'
+#   'timestamp': '2013-12-10 14:30 UTC'
+#   'value': 600
+# ,
+#   'group': 'BankAccountBalance'
+#   'timestamp': '2013-12-15 14:30 UTC'
+#   'value': 460
+# ,
+#   'group': 'BankAccountBalance'
+#   'timestamp': '2013-12-20 14:30 UTC'
+#   'value': -30
+# ,
+#   'group': 'BankAccountBalance'
+#   'timestamp': '2013-12-25 14:30 UTC'
+#   'value': -240
+# ,
+#   'group': 'BankAccountBalance'
+#   'timestamp': '2013-12-30 14:30 UTC'
+#   'value': -125
+# ]
+#
+# metrics.save "robinsonroy", metricsRobinson, (err) -> 
+#   throw err if err
+#
+# metrics.save "debug", metricsDebug, (err) -> 
+#   throw err if err
