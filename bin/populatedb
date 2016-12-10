@@ -1,5 +1,11 @@
 #!/usr/bin/env coffee
 
+console.log "\n"
+console.log "*********************************************************"
+console.log "**                     LevelDB Populate                **"
+console.log "*********************************************************"
+console.log "\n"
+
 user = require "#{__dirname}/../src/user"
 metrics = require "#{__dirname}/../src/metrics"
 
