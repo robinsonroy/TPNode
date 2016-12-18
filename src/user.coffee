@@ -21,9 +21,6 @@ module.exports =
         console.log 'user ' + username + ' add'
         callback()
 
-  remove: (username, callback)->
-    callback(username)
-
   delete: (username, callback)->
     console.log username + " has deleting is account"
     db.del username, (err)->

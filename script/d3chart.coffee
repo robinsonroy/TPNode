@@ -2,6 +2,7 @@
 data = document.getElementById("metricData").value
 data = JSON.parse( data )
 
+## sort data by date
 data.sort(  (a, b) ->
     parseFloat(a.timestamp) - parseFloat(b.timestamp);
 )
@@ -24,7 +25,7 @@ area = d3.svg.area()
   .y1((d) ->
     y(d.value)
     )
-
+# function to show graph
 graph = (data, group) ->
   svg = d3.select("body").append("svg")
       .attr("width", width + margin.left + margin.right)
@@ -72,7 +73,6 @@ graph = (data, group) ->
 
 group = []
 i = 0
-
 data.forEach( (d) ->
   group.forEach( (item) ->
     i++ if item == d.group
@@ -81,6 +81,7 @@ data.forEach( (d) ->
   i = 0
 )
 
+#for each group show a graph
 group.forEach( (g)->
   dataSet = []
   data.forEach( (d) ->
