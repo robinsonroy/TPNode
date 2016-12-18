@@ -1,4 +1,4 @@
-# http = require('http')
+http = require('http')
 
 express = require 'express'
 session = require 'express-session'
@@ -9,8 +9,16 @@ morgan  = require 'morgan'
 bodyparser = require 'body-parser'
 stylus = require 'stylus'
 nib = require 'nib'
+socket = require 'socket.io'
 
 app = express()
+server = http.Server(app)
+io = socket(server)
+
+sockets = []
+io.on 'connection' , (socket) ->
+  sockets.push socket
+
 #app.use morgan 'dev'
 
 app.use stylus.middleware
@@ -51,6 +59,17 @@ viewVariable = (req, res, next) ->
   res.locals.url = req.path
   res.locals.auth = req.session.username
   next()
+
+app.use (req, res, next)->
+  for s in sockets
+    s.emit
+    s.emit 'log',
+      url: req.url
+      username:
+        if req.session == undefined then 'anonymous'
+        else req.session.username
+  next()
+
 
 app.use viewVariable
 
@@ -151,5 +170,8 @@ app.post '/metric/delete/:group/:id', authCheck, (req, res) ->
     throw err if err
     res.redirect '/'
 
-app.listen app.get('port'), ->
+app.get '/log', (req, res) ->
+  res.render 'log'
+
+server.listen app.get('port'), ->
   console.log "listen on port #{app.get 'port'}"
