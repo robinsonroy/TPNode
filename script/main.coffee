@@ -13,10 +13,13 @@ data.forEach( (d) ->
 )
 
 group.forEach( (item)->
-  $("ul.dropdown-menu").append('<li><a id="' + item + '">' + item + '</a></li>')
+  $("ul.dropdown-menu").append('<li><a class="' + item + '">' + item + '</a></li>')
 
-  $("#"+item).click( ()->
+  $("."+item).click( ()->
+    console.log "test"
     $("#group").val(item)
+    $("#updateGroup").val(item)
+    $("#submitUpdateGroup").text("Modify " + item + "\'s values")
   )
 )
 
@@ -33,3 +36,12 @@ $("#metric-add-form-hide").click () ->
   $("#metric-add-form").hide()
   $("#metric-add-form-show").show()
   $("#metric-add-form-hide").hide()
+
+$("#metric-update-form-show").click () ->
+  $("#metric-update-form").show()
+  $("#metric-update-form-show").hide()
+  $("#metric-update-form-hide").show()
+$("#metric-update-form-hide").click () ->
+  $("#metric-update-form").hide()
+  $("#metric-update-form-show").show()
+  $("#metric-update-form-hide").hide()

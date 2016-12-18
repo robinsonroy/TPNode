@@ -28,6 +28,19 @@ html(lang="en")
           input.form-control(type="number", min="1", name='value' placeholder="Value")
           button.btn.btn-default(type="submit") Add metric
 
+      button#metric-update-form-show.btn.btn-info.btn-block(type="button") Changed Metric +
+      button#metric-update-form-hide.btn.btn-info.btn-block(type="button" style="display:none") Changed Metric -
+
+      form#metric-update-form.form-inline(method="get", action="modified", style="display : none")
+        .form-group
+          .dropdown
+            button.btn.btn-default.dropdown-toggle(type="button" id="dropdownGroup" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true") Group
+              span.caret
+            ul.dropdown-menu(aria-labelledby="dropdownGroup")
+        .form-group
+          input#updateGroup(type="hidden", name="group")
+          button#submitUpdateGroup.btn.btn-default(type="submit") select a group
+
       if metric_error
         .form-group
          .alert.alert-warning

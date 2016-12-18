@@ -23,9 +23,12 @@
   });
 
   group.forEach(function(item) {
-    $("ul.dropdown-menu").append('<li><a id="' + item + '">' + item + '</a></li>');
-    return $("#" + item).click(function() {
-      return $("#group").val(item);
+    $("ul.dropdown-menu").append('<li><a class="' + item + '">' + item + '</a></li>');
+    return $("." + item).click(function() {
+      console.log("test");
+      $("#group").val(item);
+      $("#updateGroup").val(item);
+      return $("#submitUpdateGroup").text("Modify " + item + "\'s values");
     });
   });
 
@@ -43,6 +46,18 @@
     $("#metric-add-form").hide();
     $("#metric-add-form-show").show();
     return $("#metric-add-form-hide").hide();
+  });
+
+  $("#metric-update-form-show").click(function() {
+    $("#metric-update-form").show();
+    $("#metric-update-form-show").hide();
+    return $("#metric-update-form-hide").show();
+  });
+
+  $("#metric-update-form-hide").click(function() {
+    $("#metric-update-form").hide();
+    $("#metric-update-form-show").show();
+    return $("#metric-update-form-hide").hide();
   });
 
 }).call(this);
