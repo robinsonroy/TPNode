@@ -59,3 +59,4 @@ module.exports =
           if !err
             console.log key + " has be deleted."
           throw err if err
+      callback err
