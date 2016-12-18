@@ -1,9 +1,9 @@
 data = $("#metricData")[0].value
 data = JSON.parse( data )
 
+# Find all group of the user
 group = []
 i = 0
-
 data.forEach( (d) ->
   group.forEach( (item) ->
     i++ if item == d.group
@@ -11,7 +11,7 @@ data.forEach( (d) ->
   group.push(d.group) if !i
   i = 0
 )
-
+## Fill dropdown and put event click on each element to select the good group
 group.forEach( (item)->
   $("ul.dropdown-menu").append('<li><a class="' + item + '">' + item + '</a></li>')
 
@@ -27,7 +27,7 @@ $('#datetimepicker').datetimepicker({
     format: 'yyyy-mm-dd hh:ii UTC'
 });
 
-
+## SHOW OR HIDE BUTTOM / FORM
 $("#metric-add-form-show").click () ->
   $("#metric-add-form").show()
   $("#metric-add-form-show").hide()
