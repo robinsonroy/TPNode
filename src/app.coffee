@@ -11,7 +11,7 @@ stylus = require 'stylus'
 nib = require 'nib'
 
 app = express()
-app.use morgan 'dev'
+#app.use morgan 'dev'
 
 app.use stylus.middleware
    src: __dirname + '/../stylesheets'
@@ -46,6 +46,13 @@ authCheck = (req, res, next) ->
   else
     console.log("Auth check nok")
     res.redirect '/login'
+
+viewVariable = (req, res, next) ->
+  res.locals.url = req.path
+  res.locals.auth = req.session.username
+  next()
+
+app.use viewVariable
 
 app.set('view engine', 'pug')
 app.set('views', "#{__dirname}/../views")
@@ -97,8 +104,12 @@ app.post '/user/delete', authCheck, (req, res)->
     res.redirect '/logout'
 
 app.get '/', authCheck, (req, res) ->
-  res.render 'app',
-    metric_error: req.query.metric_error ?= ''
+  metrics.get req.session.username, (err, data)->
+    throw next err if err
+    res.render 'app',
+      metric_error: req.query.metric_error ?= '',
+      metricData: JSON.stringify(data)
+  , req.query.group
 
 ## send all the user's metrics
 ## If group is pass in query it send back all the user's metrics for one group

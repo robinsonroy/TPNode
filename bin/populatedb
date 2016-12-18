@@ -9,7 +9,7 @@ console.log "\n"
 user = require "#{__dirname}/../src/user"
 metrics = require "#{__dirname}/../src/metrics"
 
-user.save "robinsonroy", "Robinson", "qwerty", "rroy@gmail.com", (err) ->
+user.save "robinsonroy", "qwerty", "Robinson", "rroy@gmail.com", (err) ->
   throw err if err
 
 user.save "lgrondin", "password", "Lionel", "lgrondin@gmail.com", (err)->
@@ -21,80 +21,80 @@ user.save "debug", "pwd", "debugMan", "debug@gmail.com", (err)->
 metricsRobinson = [
   'id' : 'HJxAXKFXx'
   'group': 'Temperature'
-  'timestamp': '2013-04-14 14:30 UTC'
+  'timestamp': '1450443600'
   'value': 10
 ,
   'id' : 'Byx7iEKFXe'
   'group': 'Temperature'
-  'timestamp': '2013-04-16 14:30 UTC'
+  'timestamp': '1450530000'
   'value': 12
 ,
   'id' : 'ByZmsNFYQg'
   'group': 'Temperature'
-  'timestamp': '2013-04-18 14:30 UTC'
+  'timestamp': '1450616400'
   'value': 9
 ,
   'id' : 'HyzQoNKYmg'
   'group': 'Temperature'
-  'timestamp': '2013-04-20 14:30 UTC'
+  'timestamp': '1450702800'
   'value': 14
 ,
   'id' : 'Byx7iEKFXe'
   'group': 'Polution'
-  'timestamp': '2013-04-14 14:30 UTC'
+  'timestamp': '1440244800'
   'value': 150
 ,
   'id' : 'H1N7jEYYXl'
   'group': 'Polution'
-  'timestamp': '2013-04-16 14:30 UTC'
+  'timestamp': '1442923200'
   'value': 170
 ,
   'id' : 'ByHQoVKKme'
   'group': 'Polution'
-  'timestamp': '2013-04-18 14:30 UTC'
+  'timestamp': '1445515200'
   'value': 185
 ,
   'id' : 'H1aeRQttQe'
   'group': 'Polution'
-  'timestamp': '2013-04-20 14:30 UTC'
+  'timestamp': '1448197200'
   'value': 145
 ]
 
 metricsDebug = [
   'id': 'HJPmsEFFXx'
   'group': 'BankAccountBalance'
-  'timestamp': '2013-12-01 14:30 UTC'
+  'timestamp': '1480597200'
   'value': 1000
 ,
   'id' : 'HJPmsEFFXx'
   'group': 'BankAccountBalance'
-  'timestamp': '2013-12-05 14:30 UTC'
+  'timestamp': '1480942800'
   'value': 700
 ,
   'id' : 'HJhlR7KtXl'
   'group': 'BankAccountBalance'
-  'timestamp': '2013-12-10 14:30 UTC'
+  'timestamp': '1481374800'
   'value': 600
 ,
   'id' : 'HJilCXYKQx'
   'group': 'BankAccountBalance'
-  'timestamp': '2013-12-15 14:30 UTC'
+  'timestamp': '1481806800'
   'value': 460
 ,
   'id' : 'Hk5XsEKF7g'
   'group': 'BankAccountBalance'
-  'timestamp': '2013-12-20 14:30 UTC'
-  'value': -30
+  'timestamp': '1482238800'
+  'value': 200
 ,
   'id' : 'Byx7iEKFXe'
   'group': 'BankAccountBalance'
-  'timestamp': '2013-12-25 14:30 UTC'
-  'value': -240
+  'timestamp': '1482670800'
+  'value': 1
 ,
   'id' : 'S1_xAmtY7e'
   'group': 'BankAccountBalance'
-  'timestamp': '2013-12-30 14:30 UTC'
-  'value': -125
+  'timestamp': '1483102800'
+  'value': 300
 ]
 
 metrics.save "robinsonroy", metricsRobinson, (err) -> 

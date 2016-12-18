@@ -1,0 +1,31 @@
+- var currentUrl = url
+
+
+
+nav.navbar.navbar-default
+  .container-fluid
+    .navbar-header
+      button.navbar-toggle.collapsed(
+        type='button'
+        data-toggle='collapse'
+        data-target='#bs-example-navbar-collapse-1'
+        aria-expanded='false'
+        )
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand METRICS APP
+    .collapse.navbar-collapse
+      ul.nav.navbar-nav.navbar-right
+        if !auth
+          li
+            a(class={active: currentUrl === '/login'}
+              href='/login') Login
+          li
+            a(class={active: currentUrl === '/signup'}
+              href='/signup'
+              ) Sign Up
+        if auth
+          li
+            a(href="/logout") Logout

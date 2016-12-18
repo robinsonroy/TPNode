@@ -35,8 +35,6 @@ module.exports =
     ws.on 'close', callback 
     for metric in metrics 
       if username and metric.group and metric.timestamp and metric.value
-        #format 2013-11-04 14:30 UTC to a timestamp
-        metric.timestamp = new Date(metric.timestamp).getTime()
         if metric.id
           ws.write key: "#{username}:#{metric.group}:#{metric.id}", value: "#{metric.timestamp}:#{metric.value}"
           console.log "Metric modified"
@@ -44,7 +42,7 @@ module.exports =
           ws.write key: "#{username}:#{metric.group}:#{shortid.generate()}", value:"#{metric.timestamp}:#{metric.value}"
           console.log "Metric created"
       else
-        callback "Missing some information in metric"
+        callback "Missing some informations in metric"
     ws.end()
 
   delete: (key, callback) ->
