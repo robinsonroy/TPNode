@@ -8,7 +8,7 @@ describe('Metrics', () ->
         should.equal("robinsonroy", value[0].username)
         should.equal("ByHQoVKKme", value[0].id)
         should.equal("Polution", value[0].group)
-        should.equal("1445515200", value[0].timestamp)
+        should.equal("1445515200000", value[0].timestamp)
         should.equal("185", value[0].value)
         done()
       ,"Polution"
@@ -19,7 +19,14 @@ describe('Metrics', () ->
   describe('#save()', () ->
     #delete the added metrics
     it('should add new metrics', (done)->
-      metric.save("robinsonroy", '{ "metric" :[{"group":"test","id": "null", "timestamp":1445515200, "value":187}] }', (err)->
+      metricJson = []
+      metricToSave =
+        group: 'test'
+        timestamp: '1445515200000'
+        value: 187
+      metricJson.push(metricToSave)
+
+      metric.save("robinsonroy", metricJson, (err)->
           should.equal(null, err)
           done()
       )
@@ -28,7 +35,7 @@ describe('Metrics', () ->
 
   describe('#delete()', () ->
     it('should delete a metric line', (done)->
-      metric.delete("test", (err) ->
+      metric.delete("robinsonroy:Polution:H1N7jEYYXl", (err) ->
         should.equal(null, err)
         done()
       )
@@ -37,11 +44,18 @@ describe('Metrics', () ->
 
   describe('#deleteFromUser()', () ->
     it('should delete all metric af the user', (done)->
-      metric.deleteFromUser("debug", (err) ->
+      metric.deleteFromUser("robinsonroy", (err) ->
         should.equal(null, err)
         done()
       )
     )
+    it('should get no metric', (done) ->
+      metric.get("robinsonroy", (err, value) ->
+        should.equal(null, err)
+        value.should.be.empty
+        done()
+        )
+      )
   )
 
 )
