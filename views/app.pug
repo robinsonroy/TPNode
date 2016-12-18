@@ -3,34 +3,35 @@ html(lang="en")
   head
     title Metrics
     include head.pug
+    link(rel='stylesheet', href='/css/bootstrap-datetimepicker.min.css')
 
     body
+      script(src="https://d3js.org/d3.v3.min.js")
+      script(src="js/bootstrap-datetimepicker.min.js")
+
       include header.pug
 
       input(type="hidden", id="metricData", value=metricData )
 
-      script(src="https://d3js.org/d3.v3.min.js")
+      button#metric-add-form-show.btn.btn-info.btn-block(type="button") Add Metric +
+      button#metric-add-form-hide.btn.btn-info.btn-block(type="button" style="display:none") Add Metric -
+
+      form#metric-add-form.form-inline(method="post", action="metric", style="display : none")
+        .form-group
+          .dropdown
+            button.btn.btn-default.dropdown-toggle(type="button" id="dropdownGroup" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true") Group
+              span.caret
+            ul.dropdown-menu(aria-labelledby="dropdownGroup")
+        .form-group
+          input#group.form-control(type="text" name='group', placeholder="Group")
+          input#datetimepicker.form-control(type="text" name='date' value="2012-05-15 21:05 UTC")
+          input.form-control(type="number", min="1", name='value' placeholder="Value")
+          button.btn.btn-default(type="submit") Add metric
+
+      if metric_error
+        .form-group
+         .alert.alert-warning
+           p #{metric_error}
+
       script(src="js/d3chart.js").data="#{metricData}"
-
-        //- form.inline-form(method="post", action="metric")
-        //-   .form-group
-        //-     button#metric-add-form-show.btn.btn-info.btn-block(type="button") Add Metric +
-        //-     button#metric-add-form-hide.btn.btn-info.btn-block(type="button" style="display:none") Add Metric -
-        //-   .form-group#metric-add-form(style="display : none")
-        //-     input#value.form-control(type="text" placeholder="Value")
-        //-     button.btn.btn-default(type="submit") Add metric
-        //- if metric_error
-        //-   .form-group
-        //-     .alert.alert-warning
-        //-       p #{metric_error}
-
-      //- script
-        :coffee-script
-          $("#metric-add-form-show").click () ->
-            $("#metric-add-form").show()
-            $("#metric-add-form-show").hide()
-            $("#metric-add-form-hide").show()
-          $("#metric-add-form-hide").click () ->
-            $("#metric-add-form").hide()
-            $("#metric-add-form-show").show()
-            $("#metric-add-form-hide").hide()
+      script(src="js/main.js")

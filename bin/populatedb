@@ -15,90 +15,117 @@ user.save "robinsonroy", "qwerty", "Robinson", "rroy@gmail.com", (err) ->
 user.save "lgrondin", "password", "Lionel", "lgrondin@gmail.com", (err)->
   throw err if err
 
-user.save "debug", "pwd", "debugMan", "debug@gmail.com", (err)->
-  throw err if err
-
 metricsRobinson = [
   'id' : 'HJxAXKFXx'
   'group': 'Temperature'
-  'timestamp': '1450443600'
+  'timestamp': '1450443600000'
   'value': 10
 ,
   'id' : 'Byx7iEKFXe'
   'group': 'Temperature'
-  'timestamp': '1450530000'
+  'timestamp': '1450530000000'
   'value': 12
 ,
   'id' : 'ByZmsNFYQg'
   'group': 'Temperature'
-  'timestamp': '1450616400'
+  'timestamp': '1450616400000'
   'value': 9
 ,
   'id' : 'HyzQoNKYmg'
   'group': 'Temperature'
-  'timestamp': '1450702800'
+  'timestamp': '1450702800000'
   'value': 14
 ,
   'id' : 'Byx7iEKFXe'
   'group': 'Polution'
-  'timestamp': '1440244800'
+  'timestamp': '1440244800000'
   'value': 150
 ,
   'id' : 'H1N7jEYYXl'
   'group': 'Polution'
-  'timestamp': '1442923200'
+  'timestamp': '1442923200000'
   'value': 170
 ,
   'id' : 'ByHQoVKKme'
   'group': 'Polution'
-  'timestamp': '1445515200'
+  'timestamp': '1445515200000'
   'value': 185
 ,
   'id' : 'H1aeRQttQe'
   'group': 'Polution'
-  'timestamp': '1448197200'
+  'timestamp': '1448197200000'
   'value': 145
+,
+  'group': 'Wind'
+  'id': 'B1518U4Ng'
+  'timestamp': '-2208984300000'
+  'value': 265
+,
+  'group': 'Wind'
+  'id': 'B1k2SI44l'
+  'timestamp': '-2208985200000'
+  'value': 250
+,
+  'group': 'Wind'
+  'id': 'ByuAr8NNx'
+  'timestamp': '-2208984600000'
+  'value': 245
+,
+  'group': 'Wind'
+  'id': 'Hk5488NEg'
+  'timestamp': '-2208983700000'
+  'value': 195
+,
+  'group': 'Wind'
+  'id': 'HkBpSLE4x'
+  'timestamp': '-2208984900000'
+  'value': 170
+,
+  'group': 'Wind'
+  'id': 'Sk0GLU4Eg'
+  'timestamp': '-2208984000000'
+  'value': 136
 ]
 
-metricsDebug = [
+metricsLgondin = [
   'id': 'HJPmsEFFXx'
   'group': 'BankAccountBalance'
-  'timestamp': '1480597200'
+  'timestamp': '1480597200000'
   'value': 1000
 ,
   'id' : 'HJPmsEFFXx'
   'group': 'BankAccountBalance'
-  'timestamp': '1480942800'
+  'timestamp': '1480942800000'
   'value': 700
 ,
   'id' : 'HJhlR7KtXl'
   'group': 'BankAccountBalance'
-  'timestamp': '1481374800'
+  'timestamp': '1481374800000'
   'value': 600
 ,
   'id' : 'HJilCXYKQx'
   'group': 'BankAccountBalance'
-  'timestamp': '1481806800'
+  'timestamp': '1481806800000'
   'value': 460
 ,
   'id' : 'Hk5XsEKF7g'
   'group': 'BankAccountBalance'
-  'timestamp': '1482238800'
+  'timestamp': '1482238800000'
   'value': 200
 ,
   'id' : 'Byx7iEKFXe'
   'group': 'BankAccountBalance'
-  'timestamp': '1482670800'
+  'timestamp': '1482670800000'
   'value': 1
 ,
   'id' : 'S1_xAmtY7e'
   'group': 'BankAccountBalance'
-  'timestamp': '1483102800'
+  'timestamp': '1483102800000'
   'value': 300
 ]
 
 metrics.save "robinsonroy", metricsRobinson, (err) -> 
   throw err if err
 
-metrics.save "debug", metricsDebug, (err) -> 
+metrics.save "lgrondin", metricsLgondin, (err) -> 
   throw err if err

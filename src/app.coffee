@@ -119,6 +119,22 @@ app.get '/metrics.json', authCheck, (req, res)->
     res.status(200).json data
   , req.query.group
 
+app.post '/metric', authCheck, (req, res)->
+  timestamp = new Date(req.body.date).getTime()
+  metric =
+    group: req.body.group
+    timestamp: timestamp
+    value: req.body.value
+  metricsJson = []
+  metricsJson.push(metric)
+  metrics.save req.session.username, metricsJson, (err) ->
+    if err
+      console.log "error" + err
+      req.params.metric_error = err
+      res.redirect '/'
+    else
+      res.redirect '/'
+
 app.post '/metrics.json', authCheck, (req, res)->
   metricsJson = req.body
   metrics.save req.session.username, metricsJson, (err) ->

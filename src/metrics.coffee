@@ -29,7 +29,7 @@ module.exports =
       callback null, metrics
 
   save: (username, metrics, callback) -> 
-    console.log "Save some metrics"
+    console.log "Save some metrics ..."
     ws = db.createWriteStream() 
     ws.on 'error', callback 
     ws.on 'close', callback 

@@ -41,7 +41,7 @@
     data.forEach(function(d) {
       var timestamp;
       timestamp = parseInt(d.timestamp);
-      d.timestamp = new Date(timestamp * 1000);
+      d.timestamp = new Date(timestamp);
       return d.value = +d.value;
     });
     x.domain(d3.extent(data, function(d) {

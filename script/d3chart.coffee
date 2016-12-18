@@ -34,7 +34,7 @@ graph = (data, group) ->
 
   data.forEach( (d)->
     timestamp = parseInt(d.timestamp)
-    d.timestamp = new Date(timestamp * 1000)
+    d.timestamp = new Date(timestamp)
     d.value = +d.value
   )
 
