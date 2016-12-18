@@ -8,6 +8,7 @@ This a nodeJS project to learn :
   - d3chart library
   - Unit testing with Should / Mocha / Travis
   - Key Value database with LevelDB
+
 ---
 ## Install
 ```
@@ -16,6 +17,7 @@ npm install
 bin/populated
 bin/start
 ```
+
 ---
 ## Usage
 
